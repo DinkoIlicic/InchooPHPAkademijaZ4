@@ -6,29 +6,61 @@
  * Time: 10:42
  */
 
-while(true) {
+include_once 'functions.php';
+
+for(;;) {
 
     // Print the menu on console
-    printMenu();
+    employeeMenu();
 
     // Read user choice
     $choice = trim( fgets(STDIN) );
 
-    // Exit application
-    if( $choice == 5 ) {
+    // Switch with employeeMenu
+    switch($choice) {
+        case 'e':
+            exit();
+            break;
+        case '1':
 
-        break;
+            break;
+        case '2':
+
+            break;
+        case '3':
+
+            break;
+        case '4':
+
+            break;
+        case '5':
+            statisticsMenu();
+            $choice2 = trim( fgets(STDIN) );
+            for(;$choice2 != 'r';) {
+                switch ($choice2) {
+                    case 'e':
+                        exit();
+                        break;
+                    case '1':
+                        continue;
+                        break;
+                    case '2':
+
+                        break;
+                    case '3':
+
+                        break;
+                    case '4':
+
+                        break;
+                    default:
+                        echo "Not valid input";
+                }
+
+                $choice2 = trim( fgets(STDIN) );
+            }
+            break;
+        default:
+            echo "Not valid input";
     }
-}
-
-function printMenu() {
-
-    echo "************ Reservation System ******************\n";
-    echo "1 - Choose Source\n";
-    echo "2 - Choose Destination\n";
-    echo "3 - Personal Details\n";
-    echo "4 - Make Reservation\n";
-    echo "5 - Quit\n";
-    echo "************ Reservation System ******************\n";
-    echo "Enter your choice from 1 to 5 ::";
 }
