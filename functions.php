@@ -185,11 +185,73 @@ function changeDataEmployee($employeeArray, $employeeId)
     return $employeeArray;
 }
 
-function checkIfIdExists($employeeArray, $chosenId) {
+function checkIfIdExists($employeeArray, $chosenId)
+{
     for ($i = 0; $i < count($employeeArray); $i++) {
-        if ($employeeArray[$i]->getId() == $chosenId) {
+        if (isset($employeeArray[$i]) && $employeeArray[$i]->getId() == $chosenId) {
             return true;
         }
     }
     return false;
+}
+
+function eraseEmployee($employeeArray, $employeeId)
+{
+    for ($i = 0; $i < count($employeeArray); $i++) {
+        if(isset($employeeArray[$i]) && $employeeArray[$i]->getId()==$employeeId){
+            unset($employeeArray[$i]);
+        }
+    }
+    return $employeeArray;
+}
+
+function totalAge($employeeArray)
+{
+    $today = new DateTime(date('d.m.y'));
+    $totalDays = 0;
+    for ($i = 0; $i < count($employeeArray); $i++) {
+        if(isset($employeeArray[$i])) {
+            $singleAgeStr = new DateTime($employeeArray[$i]->getDateOfBirth());
+            $diff = date_diff($singleAgeStr, $today);
+            $totalDays += $diff->days;
+        }
+    }
+
+    $years = ($totalDays / 365) ; // days / 365 days
+    $years = floor($years); // Remove all decimals
+
+    $month = ($totalDays % 365) / 30.5; // I choose 30.5 for Month (30,31) ;)
+    $month = floor($month); // Remove all decimals
+
+    $days = ($totalDays % 365) % 30.5; // the rest of days
+
+    // Echo all information set
+    return 'Our employees total years: ' . $years . ', months: ' . $month . ', days: ' . $days . "\n";
+}
+
+function averageAge($employeeArray)
+{
+    $today = new DateTime(date('d.m.y'));
+    $totalDays = 0;
+    $employeeCount = 0;
+    for ($i = 0; $i < count($employeeArray); $i++) {
+        if(isset($employeeArray[$i])) {
+            $singleAgeStr = new DateTime($employeeArray[$i]->getDateOfBirth());
+            $diff = date_diff($singleAgeStr, $today);
+            $totalDays += $diff->days;
+            $employeeCount++;
+        }
+    }
+
+    $averageDays = $totalDays / $employeeCount;
+    $years = ($averageDays / 365) ; // days / 365 days
+    $years = floor($years); // Remove all decimals
+
+    $month = ($averageDays % 365) / 30.5; // I choose 30.5 for Month (30,31) ;)
+    $month = floor($month); // Remove all decimals
+
+    $days = ($averageDays % 365) % 30.5; // the rest of days
+
+    // Echo all information set
+    return 'Our employees average years: ' . $years . ', months: ' . $month . ', days: ' . $days . "\n";
 }

@@ -28,31 +28,48 @@ for(;;) {
             $employeeArray[] = enterEmployeeInfo();
             break;
         case '3':
-            echo "Write the ID of the employee: ";
+            echo "Write the ID of the employee that You want to change: ";
             $chosenId = readline();
             $idExists = checkIfIdExists($employeeArray, $chosenId);
             if($idExists !== true) {
-                echo "Employee by that ID not found \n";
+                echo "Employee by that ID not found! \n";
             } else {
                 changeDataEmployee($employeeArray, $chosenId);
             }
             break;
         case '4':
+            echo "Write the ID of the employee that You want to erase: ";
+            $chosenId = readline();
+            $idExists = checkIfIdExists($employeeArray, $chosenId);
+            if($idExists !== true) {
+                echo "Employee by that ID not found! \n";
+            } else {
+                echo "Are You sure that You want to erase the employee? (Yes/No) \n";
+                if(readline() !== "Yes") {
+                    echo "Employee has not been erased. \n";
+                } else {
+                    $employeeArray = eraseEmployee($employeeArray, $chosenId);
+                    echo "Employee has been erased. \n";
+                }
+            }
 
             break;
         case '5':
-            statisticsMenu();
-            $choice2 = trim( fgets(STDIN) );
+            $choice2 = "";
             for(;$choice2 != 'r';) {
+                statisticsMenu();
+                $choice2 = trim( fgets(STDIN) );
                 switch ($choice2) {
                     case 'e':
                         exit();
                         break;
                     case '1':
-
+                        $totalAge = totalAge($employeeArray);
+                        echo $totalAge;
                         break;
                     case '2':
-
+                        $averageAge = averageAge($employeeArray);
+                        echo $averageAge;
                         break;
                     case '3':
 
@@ -63,8 +80,6 @@ for(;;) {
                     default:
                         echo "Not valid input \n";
                 }
-
-                $choice2 = trim( fgets(STDIN) );
             }
             break;
         default:
