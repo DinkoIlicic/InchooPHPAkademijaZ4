@@ -228,7 +228,7 @@ function totalAge($employeeArray)
     $days = ($totalDays % 365) % 30.5; // the rest of days
 
     // Echo all information set
-    return 'Our employees total years: ' . $years . ', months: ' . $month . ', days: ' . $days . "\n";
+    echo 'Our employees total years: ' . $years . ', months: ' . $month . ', days: ' . $days . "\n";
 }
 
 function averageAge($employeeArray)
@@ -255,7 +255,7 @@ function averageAge($employeeArray)
     $days = ($averageDays % 365) % 30.5; // the rest of days
 
     // Echo all information set
-    return 'Our employees average years: ' . $years . ', months: ' . $month . ', days: ' . $days . "\n";
+    echo 'Our employees average years: ' . $years . ', months: ' . $month . ', days: ' . $days . "\n";
 }
 
 function amountYearsDiff($employeeArray)
@@ -278,7 +278,11 @@ function amountYearsDiff($employeeArray)
             }
         }
     }
-    return $arrayAmount;
+
+    echo "Employees younger than 20 earn total of: " . $arrayAmount[0] . "\n";
+    echo "Employees between 20 and 30 years earn total of: " . $arrayAmount[1] . "\n";
+    echo "Employees between 30 and 40 years earn total of: " . $arrayAmount[2] . "\n";
+    echo "Employees older than 40 earn total of: " . $arrayAmount[3] . "\n";
 }
 
 function amountGenderDiff($employeeArray)
@@ -308,5 +312,13 @@ function amountGenderDiff($employeeArray)
     }
 
     $arrayBack = [$averageMale, $averageFemale];
-    return $arrayBack;
+    echo "Male employees average earn is: " . $arrayBack[0] . "\n";
+    echo "Female employees average earn is: " . $arrayBack[1] . "\n";
+    if($arrayBack[0] > $arrayBack[1]) {
+        echo "Difference between genders is: " . ($arrayBack[0] - $arrayBack[1]) . " in favor of males \n";
+    } elseif($arrayBack[0] < $arrayBack[1]) {
+        echo "Difference between genders is: " . ($arrayBack[1] - $arrayBack[0]) . " in favor of females \n";
+    } elseif($arrayBack[0] == $arrayBack[1]) {
+        echo "They earn the same amount: " . $arrayBack[0] . "\n";
+    }
 }
