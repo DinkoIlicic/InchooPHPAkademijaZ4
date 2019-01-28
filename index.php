@@ -7,6 +7,7 @@
  */
 
 include_once 'functions.php';
+include_once 'Employees.php';
 for(;;) {
     // Print the menu on console
     employeeMenu();
@@ -23,7 +24,9 @@ for(;;) {
 
             break;
         case '2':
-
+            $x = new Employees();
+            $x->getId();
+            echo "\n";
             break;
         case '3':
 
@@ -40,7 +43,7 @@ for(;;) {
                         exit();
                         break;
                     case '1':
-                        continue;
+
                         break;
                     case '2':
 

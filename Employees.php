@@ -6,8 +6,8 @@
  * Time: 10:43
  */
 
-include 'InstanceGenerator.php';
-class Employees extends InstanceGenerator
+include 'IdGenerator.php';
+class Employees extends IdGenerator
 {
     private $firstName;
     private $lastName;
@@ -15,9 +15,22 @@ class Employees extends InstanceGenerator
     private $gender;
     private $amount;
 
-    public function __construct($firstName, $lastName, $dateOfBirth, $gender, $amount)
+    public function __construct()
     {
-        
+
+    }
+
+    /**
+     * @return null
+     */
+    public static function getId()
+    {
+        return self::$id;
+    }
+
+    public function hey()
+    {
+        echo "hey";
     }
 
     /**

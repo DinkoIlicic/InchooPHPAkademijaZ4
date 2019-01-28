@@ -6,18 +6,19 @@
  * Time: 12:23
  */
 
-class InstanceGenerator
+class IdGenerator
 {
     protected static $id = null;
 
     public static function generate()
     {
         if(!isset(self::$id)) {
-            self::$id = new self();
+            self::$id = 1;
             global $employeeArray;
             $employeeArray = [];
+        } else {
+            self::$id +=1;
         }
-        self::$id++;
         return self::$id;
     }
 }
