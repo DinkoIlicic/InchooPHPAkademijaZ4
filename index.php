@@ -7,9 +7,7 @@
  */
 
 include_once 'functions.php';
-
 for(;;) {
-
     // Print the menu on console
     employeeMenu();
 
