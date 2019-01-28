@@ -133,3 +133,63 @@ function dateCheck($var)
         return $var;
     }
 }
+
+function changeDataEmployee($employeeArray, $employeeId)
+{
+    echo "****************************************************\n";
+    for ($i = 0; $i < count($employeeArray); $i++) {
+        if($employeeArray[$i]->getId() == $employeeId) {
+            echo "Choose which data will be changed by typing the number next to it. \n";
+            echo "First Name: 1 \n";
+            echo "Last Name: 2 \n";
+            echo "Date of birth: 3 \n";
+            echo "Gender: 4 \n";
+            echo "Amount of monthly payment: 5 \n";
+            echo "Return to employee menu: r \n";
+            echo "****************************************************\n";
+
+            switch(readline()) {
+                case 1:
+                    echo "Old first name: " . $employeeArray[$i]->getFirstName() . "\n";
+                    echo "Insert new first name: ";
+                    $employeeArray[$i]->setFirstName(nameCheck(readline()));
+                    break;
+                case 2:
+                    echo "Old last name: " . $employeeArray[$i]->getLastName() . "\n";
+                    echo "Insert new last name: ";
+                    $employeeArray[$i]->setLastName(nameCheck(readline()));
+                    break;
+                case 3:
+                    echo "Old date of birth: " . $employeeArray[$i]->getDateOfBirth() . "\n";
+                    echo "Insert new date of birth: ";
+                    $employeeArray[$i]->setDateOfBirth(dateCheck(readline()));
+                    break;
+                case 4:
+                    echo "Old gender: " . $employeeArray[$i]->getGender() . "\n";
+                    echo "Insert new gender: ";
+                    $employeeArray[$i]->setGender(genderCheck(readline()));
+                    break;
+                case 5:
+                    echo "Old amount of monthly payment: " . $employeeArray[$i]->getAmount() . "\n";
+                    echo "Insert new amount of monthly payment: ";
+                    $employeeArray[$i]->setAmount(amountcheck(readline()));
+                    break;
+                case "r":
+                    break 2;
+                default:
+                    echo "Wrong input inserted";
+                    break;
+            }
+        }
+    }
+    return $employeeArray;
+}
+
+function checkIfIdExists($employeeArray, $chosenId) {
+    for ($i = 0; $i < count($employeeArray); $i++) {
+        if ($employeeArray[$i]->getId() == $chosenId) {
+            return true;
+        }
+    }
+    return false;
+}

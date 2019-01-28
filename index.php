@@ -28,7 +28,14 @@ for(;;) {
             $employeeArray[] = enterEmployeeInfo();
             break;
         case '3':
-
+            echo "Write the ID of the employee: ";
+            $chosenId = readline();
+            $idExists = checkIfIdExists($employeeArray, $chosenId);
+            if($idExists !== true) {
+                echo "Employee by that ID not found \n";
+            } else {
+                changeDataEmployee($employeeArray, $chosenId);
+            }
             break;
         case '4':
 
