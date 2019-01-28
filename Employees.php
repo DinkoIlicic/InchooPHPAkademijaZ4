@@ -16,12 +16,13 @@ class Employees extends IdGenerator
     protected $gender;
     protected $amount;
 
-    public function __construct($firstName, $lastName, $gender, $amount)
+    public function __construct($firstName, $lastName, $dateOfBirth, $gender, $amount)
     {
 
         $this->id = idGenerator::generate();
         $this->firstName = $firstName;
         $this->lastName = $lastName;
+        $this->dateOfBirth = $dateOfBirth;
         $this->gender = $gender;
         $this->amount = $amount;
     }

@@ -54,13 +54,13 @@ for(;;) {
 
                         break;
                     default:
-                        echo "Not valid input";
+                        echo "Not valid input \n";
                 }
 
                 $choice2 = trim( fgets(STDIN) );
             }
             break;
         default:
-            echo "Not valid input";
+            echo "Not valid input \n";
     }
 }
