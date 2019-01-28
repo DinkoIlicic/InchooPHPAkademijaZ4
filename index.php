@@ -8,6 +8,7 @@
 
 include_once 'functions.php';
 include_once 'Employees.php';
+$employeeArray = [];
 for(;;) {
     // Print the menu on console
     employeeMenu();
@@ -21,12 +22,10 @@ for(;;) {
             exit();
             break;
         case '1':
-
+            showEmployeeInfo($employeeArray);
             break;
         case '2':
-            $x = new Employees();
-            $x->getId();
-            echo "\n";
+            $employeeArray[] = enterEmployeeInfo();
             break;
         case '3':
 

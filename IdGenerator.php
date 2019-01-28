@@ -8,17 +8,15 @@
 
 class IdGenerator
 {
-    protected static $id = null;
+    public static $numb = null;
 
     public static function generate()
     {
-        if(!isset(self::$id)) {
-            self::$id = 1;
-            global $employeeArray;
-            $employeeArray = [];
+        if(!isset(self::$numb)) {
+            self::$numb = 1;
         } else {
-            self::$id +=1;
+            self::$numb +=1;
         }
-        return self::$id;
+        return self::$numb;
     }
 }

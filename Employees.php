@@ -9,28 +9,35 @@
 include 'IdGenerator.php';
 class Employees extends IdGenerator
 {
-    private $firstName;
-    private $lastName;
-    private $dateOfBirth;
-    private $gender;
-    private $amount;
+    protected $id;
+    protected $firstName;
+    protected $lastName;
+    protected $dateOfBirth;
+    protected $gender;
+    protected $amount;
 
-    public function __construct()
+    public function __construct($firstName, $lastName, $gender, $amount)
     {
 
+        $this->id = idGenerator::generate();
+        $this->firstName = $firstName;
+        $this->lastName = $lastName;
+        $this->gender = $gender;
+        $this->amount = $amount;
     }
 
     /**
      * @return null
      */
-    public static function getId()
+    /**
+     * @return null
+     */
+    /**
+     * @return null
+     */
+    public function getId()
     {
-        return self::$id;
-    }
-
-    public function hey()
-    {
-        echo "hey";
+        return $this->id;
     }
 
     /**
