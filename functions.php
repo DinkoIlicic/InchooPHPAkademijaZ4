@@ -137,8 +137,9 @@ function dateCheck($var)
 function changeDataEmployee($employeeArray, $employeeId)
 {
     echo "****************************************************\n";
-    for ($i = 0; $i < count($employeeArray); $i++) {
-        if($employeeArray[$i]->getId() == $employeeId) {
+    foreach ($employeeArray as $employee) {
+        if($employee->getId() == $employeeId) {
+            $currentId = ($employee->getId())-1;
             echo "Choose which data will be changed by typing the number next to it. \n";
             echo "First Name: 1 \n";
             echo "Last Name: 2 \n";
@@ -150,29 +151,29 @@ function changeDataEmployee($employeeArray, $employeeId)
 
             switch(readline()) {
                 case 1:
-                    echo "Old first name: " . $employeeArray[$i]->getFirstName() . "\n";
+                    echo "Old first name: " . $employee->getFirstName() . "\n";
                     echo "Insert new first name: ";
-                    $employeeArray[$i]->setFirstName(nameCheck(readline()));
+                    $employeeArray[$currentId]->setFirstName(nameCheck(readline()));
                     break;
                 case 2:
-                    echo "Old last name: " . $employeeArray[$i]->getLastName() . "\n";
+                    echo "Old last name: " . $employee->getLastName() . "\n";
                     echo "Insert new last name: ";
-                    $employeeArray[$i]->setLastName(nameCheck(readline()));
+                    $employeeArray[$currentId]->setLastName(nameCheck(readline()));
                     break;
                 case 3:
-                    echo "Old date of birth: " . $employeeArray[$i]->getDateOfBirth() . "\n";
+                    echo "Old date of birth: " . $employee->getDateOfBirth() . "\n";
                     echo "Insert new date of birth: ";
-                    $employeeArray[$i]->setDateOfBirth(dateCheck(readline()));
+                    $employeeArray[$currentId]->setDateOfBirth(dateCheck(readline()));
                     break;
                 case 4:
-                    echo "Old gender: " . $employeeArray[$i]->getGender() . "\n";
+                    echo "Old gender: " . $employee->getGender() . "\n";
                     echo "Insert new gender: ";
-                    $employeeArray[$i]->setGender(genderCheck(readline()));
+                    $employeeArray[$currentId]->setGender(genderCheck(readline()));
                     break;
                 case 5:
-                    echo "Old amount of monthly payment: " . $employeeArray[$i]->getAmount() . "\n";
+                    echo "Old amount of monthly payment: " . $employee->getAmount() . "\n";
                     echo "Insert new amount of monthly payment: ";
-                    $employeeArray[$i]->setAmount(amountcheck(readline()));
+                    $employeeArray[$currentId]->setAmount(amountcheck(readline()));
                     break;
                 case "r":
                     break 2;
@@ -187,8 +188,8 @@ function changeDataEmployee($employeeArray, $employeeId)
 
 function checkIfIdExists($employeeArray, $chosenId)
 {
-    for ($i = 0; $i < count($employeeArray); $i++) {
-        if (isset($employeeArray[$i]) && $employeeArray[$i]->getId() == $chosenId) {
+    foreach ($employeeArray as $employee) {
+        if (isset($employee) && $employee->getId() == $chosenId) {
             return true;
         }
     }
@@ -197,9 +198,10 @@ function checkIfIdExists($employeeArray, $chosenId)
 
 function eraseEmployee($employeeArray, $employeeId)
 {
-    for ($i = 0; $i < count($employeeArray); $i++) {
-        if(isset($employeeArray[$i]) && $employeeArray[$i]->getId()==$employeeId){
-            unset($employeeArray[$i]);
+    foreach ($employeeArray as $employee) {
+        if(isset($employee) && $employee->getId()==$employeeId){
+            $currentEmployee = ($employee->getId())-1;
+            unset($employeeArray[$currentEmployee]);
         }
     }
     return $employeeArray;
@@ -209,9 +211,9 @@ function totalAge($employeeArray)
 {
     $today = new DateTime(date('d.m.y'));
     $totalDays = 0;
-    for ($i = 0; $i < count($employeeArray); $i++) {
-        if(isset($employeeArray[$i])) {
-            $singleAgeStr = new DateTime($employeeArray[$i]->getDateOfBirth());
+    foreach ($employeeArray as $employee) {
+        if(isset($employee)) {
+            $singleAgeStr = new DateTime($employee->getDateOfBirth());
             $diff = date_diff($singleAgeStr, $today);
             $totalDays += $diff->days;
         }
@@ -234,9 +236,9 @@ function averageAge($employeeArray)
     $today = new DateTime(date('d.m.y'));
     $totalDays = 0;
     $employeeCount = 0;
-    for ($i = 0; $i < count($employeeArray); $i++) {
-        if(isset($employeeArray[$i])) {
-            $singleAgeStr = new DateTime($employeeArray[$i]->getDateOfBirth());
+    foreach ($employeeArray as $employee) {
+        if(isset($employee)) {
+            $singleAgeStr = new DateTime($employee->getDateOfBirth());
             $diff = date_diff($singleAgeStr, $today);
             $totalDays += $diff->days;
             $employeeCount++;
@@ -254,4 +256,57 @@ function averageAge($employeeArray)
 
     // Echo all information set
     return 'Our employees average years: ' . $years . ', months: ' . $month . ', days: ' . $days . "\n";
+}
+
+function amountYearsDiff($employeeArray)
+{
+    $today = new DateTime(date('d.m.y'));
+    $arrayAmount = [0,0,0,0];
+    foreach ($employeeArray as $employee) {
+        if(isset($employee)) {
+            $employeeDate = $employee->getDateOfBirth();
+            $testDate = new DateTime($employeeDate);
+            $interval = $testDate->diff($today);
+            if($interval->y < 20) {
+                $arrayAmount[0] += $employee->getAmount();
+            } elseif($interval->y >= 20 && $interval->y < 30) {
+                $arrayAmount[1] += $employee->getAmount();
+            } elseif($interval->y >= 30 && $interval->y < 40) {
+                $arrayAmount[2] += $employee->getAmount();
+            } elseif($interval->y >= 40) {
+                $arrayAmount[3] += $employee->getAmount();
+            }
+        }
+    }
+    return $arrayAmount;
+}
+
+function amountGenderDiff($employeeArray)
+{
+    $arrayAmount = [0,0,0,0];
+    foreach ($employeeArray as $employee) {
+        if(isset($employee)) {
+            if($employee->getGender() == "m") {
+                $arrayAmount[0] += $employee->getAmount();
+                $arrayAmount[1]++;
+            } elseif($employee->getGender() == "f") {
+                $arrayAmount[2] += $employee->getAmount();
+                $arrayAmount[3]++;
+            }
+        }
+    }
+    if($arrayAmount[0] != 0) {
+        $averageMale = $arrayAmount[0] / $arrayAmount[1];
+    } else {
+        $averageMale = 0;
+    }
+
+    if($arrayAmount[2] != 0) {
+        $averageFemale = $arrayAmount[2] / $arrayAmount[3];
+    } else {
+        $averageFemale = 0;
+    }
+
+    $arrayBack = [$averageMale, $averageFemale];
+    return $arrayBack;
 }
