@@ -7,7 +7,9 @@
  */
 include_once 'Employees.php';
 
-
+/**
+ * Echoes the employee menu to the user
+ */
 function employeeMenu()
 {
     echo "************ Employee Menu ******************\n";
@@ -21,6 +23,9 @@ function employeeMenu()
     echo "Enter your choice from 1 to 5 ::";
 }
 
+/**
+ * Echoes the statistics menu to the user
+ */
 function statisticsMenu()
 {
     echo "************ Statistics Menu ******************\n";
@@ -34,7 +39,9 @@ function statisticsMenu()
     echo "Enter your choice from 1 to 4 ::";
 }
 
-// Function is used to create new instance of class Employee. Entered input is checked instantly to match whats required
+/**
+ * Function is used to create new instance of class Employee. Entered input is checked instantly to match whats required
+*/
 function enterEmployeeInfo()
 {
 
@@ -74,6 +81,11 @@ function showEmployeeInfo($employeeArray)
     }
 }
 
+/**
+ * @param $var
+ * @return mixed
+ * Checks if name contains only english letters
+ */
 function nameCheck($var)
 {
     if(empty($var) || preg_match('/[^A-Za-z]/', $var)) {
@@ -85,6 +97,11 @@ function nameCheck($var)
     }
 }
 
+/**
+ * @param $var
+ * @return mixed
+ * This functions checks if given variable contains 'm' or 'f', nothing else passes through
+ */
 function genderCheck($var)
 {
     if(empty($var) || ($var != "m" && $var != "f")) {
@@ -96,6 +113,11 @@ function genderCheck($var)
     }
 }
 
+/**
+ * @param $var
+ * @return float
+ * Function checks if the amount is a float and contains only numbers and '.'
+ */
 function amountCheck($var)
 {
     $var = floatval(str_replace(",", ".", $var));
@@ -108,7 +130,12 @@ function amountCheck($var)
     }
 }
 
-
+/**
+ * @param $var
+ * @return mixed
+ * This function will check if the date is inserted in correct format which is dd.MM.YYYY
+ * The Date can't be bigger than current date.
+ */
 function dateCheck($var)
 {
     $matches = array();
@@ -142,6 +169,8 @@ function dateCheck($var)
  * @param $employeeArray Employees[]
  * @param $employeeId
  * @return mixed
+ * This function uses id and array of the employees, checks if ID exists in array and then gives the user
+ * the ability to choose which information of the employee to change. It shows old value and gives option to insert new value
  */
 function changeDataEmployee($employeeArray, $employeeId)
 {
@@ -199,6 +228,7 @@ function changeDataEmployee($employeeArray, $employeeId)
  * @param $employeeArray Employees[]
  * @param $chosenId
  * @return bool
+ * Function is checking if given param id exists in array
  */
 function checkIfIdExists($employeeArray, $chosenId)
 {
@@ -214,6 +244,8 @@ function checkIfIdExists($employeeArray, $chosenId)
  * @param $employeeArray Employees[]
  * @param $employeeId
  * @return mixed
+ * This function will take 2 params, array and id of employee that needs to be deleted. First it checks if the id exists
+ * in the array and then removes it.
  */
 function eraseEmployee($employeeArray, $employeeId)
 {
@@ -229,6 +261,8 @@ function eraseEmployee($employeeArray, $employeeId)
 /**
  * @param $employeeArray Employees[]
  * @throws Exception
+ * Function check how old each employee is and adds the age of them together to variable $totalDays that stores how old
+ * they are in days. It will echo out total years, months and days of all employees.
  */
 function totalAge($employeeArray)
 {
@@ -257,6 +291,8 @@ function totalAge($employeeArray)
 /**
  * @param $employeeArray Employees[]
  * @throws Exception
+ * This function will check how old every employee is, add their ages together and divide by number of employees
+ * Then it shows only average year of the employee. Echoes the average year.
  */
 function averageAge($employeeArray)
 {
@@ -276,18 +312,16 @@ function averageAge($employeeArray)
     $years = ($averageDays / 365) ; // days / 365 days
     $years = floor($years); // Remove all decimals
 
-    $month = ($averageDays % 365) / 30.5; // I choose 30.5 for Month (30,31) ;)
-    $month = floor($month); // Remove all decimals
-
-    $days = ($averageDays % 365) % 30.5; // the rest of days
 
     // Echo all information set
-    echo 'Our employees average years: ' . $years . ', months: ' . $month . ', days: ' . $days . "\n";
+    echo "The average employee is " . $years . " years old \n";
 }
 
 /**
  * @param $employeeArray Employees[]
  * @throws Exception
+ * This function counts the total amount of monthly payment in 4 groups (employees younger than 20 years, between
+ * 20-30 years, between 30-40 years and older than 40 years) than echoes them out.
  */
 function amountYearsDiff($employeeArray)
 {
@@ -318,6 +352,9 @@ function amountYearsDiff($employeeArray)
 
 /**
  * @param $employeeArray Employees[]
+ * This function counts the amount of each gender and how many employees are that gender, divides the number
+ * and we get the average amount of monthly payment per gender.
+ * Function does not return anything, it just echoes average amount per gender and the difference between them.
  */
 function amountGenderDiff($employeeArray)
 {
