@@ -6,7 +6,7 @@
  * Time: 10:43
  */
 
-include 'IdGenerator.php';
+include_once 'IdGenerator.php';
 class Employees extends IdGenerator
 {
     protected $id;
@@ -18,8 +18,7 @@ class Employees extends IdGenerator
 
     public function __construct($firstName, $lastName, $dateOfBirth, $gender, $amount)
     {
-
-        $this->id = idGenerator::generate();
+        $this->id = self::generate();
         $this->firstName = $firstName;
         $this->lastName = $lastName;
         $this->dateOfBirth = $dateOfBirth;

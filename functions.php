@@ -5,7 +5,7 @@
  * Date: 28.01.19.
  * Time: 10:58
  */
-include 'Employees.php';
+include_once 'Employees.php';
 
 
 function employeeMenu()
@@ -34,6 +34,7 @@ function statisticsMenu()
     echo "Enter your choice from 1 to 4 ::";
 }
 
+// Function is used to create new instance of class Employee. Entered input is checked instantly to match whats required
 function enterEmployeeInfo()
 {
 
@@ -56,6 +57,9 @@ function enterEmployeeInfo()
     return $x;
 }
 
+/**
+ * @param $employeeArray Employees[]
+ */
 function showEmployeeInfo($employeeArray)
 {
     echo "****************************************************\n";
@@ -134,6 +138,11 @@ function dateCheck($var)
     }
 }
 
+/**
+ * @param $employeeArray Employees[]
+ * @param $employeeId
+ * @return mixed
+ */
 function changeDataEmployee($employeeArray, $employeeId)
 {
     echo "****************************************************\n";
@@ -186,6 +195,11 @@ function changeDataEmployee($employeeArray, $employeeId)
     return $employeeArray;
 }
 
+/**
+ * @param $employeeArray Employees[]
+ * @param $chosenId
+ * @return bool
+ */
 function checkIfIdExists($employeeArray, $chosenId)
 {
     foreach ($employeeArray as $employee) {
@@ -196,6 +210,11 @@ function checkIfIdExists($employeeArray, $chosenId)
     return false;
 }
 
+/**
+ * @param $employeeArray Employees[]
+ * @param $employeeId
+ * @return mixed
+ */
 function eraseEmployee($employeeArray, $employeeId)
 {
     foreach ($employeeArray as $employee) {
@@ -207,6 +226,10 @@ function eraseEmployee($employeeArray, $employeeId)
     return $employeeArray;
 }
 
+/**
+ * @param $employeeArray Employees[]
+ * @throws Exception
+ */
 function totalAge($employeeArray)
 {
     $today = new DateTime(date('d.m.y'));
@@ -231,6 +254,10 @@ function totalAge($employeeArray)
     echo 'Our employees total years: ' . $years . ', months: ' . $month . ', days: ' . $days . "\n";
 }
 
+/**
+ * @param $employeeArray Employees[]
+ * @throws Exception
+ */
 function averageAge($employeeArray)
 {
     $today = new DateTime(date('d.m.y'));
@@ -258,6 +285,10 @@ function averageAge($employeeArray)
     echo 'Our employees average years: ' . $years . ', months: ' . $month . ', days: ' . $days . "\n";
 }
 
+/**
+ * @param $employeeArray Employees[]
+ * @throws Exception
+ */
 function amountYearsDiff($employeeArray)
 {
     $today = new DateTime(date('d.m.y'));
@@ -285,6 +316,9 @@ function amountYearsDiff($employeeArray)
     echo "Employees older than 40 earn total of: " . $arrayAmount[3] . "\n";
 }
 
+/**
+ * @param $employeeArray Employees[]
+ */
 function amountGenderDiff($employeeArray)
 {
     $arrayAmount = [0,0,0,0];

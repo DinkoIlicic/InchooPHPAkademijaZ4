@@ -7,7 +7,6 @@
  */
 
 include_once 'functions.php';
-include_once 'Employees.php';
 $employeeArray = [];
 for(;;) {
     // Print the menu on console
