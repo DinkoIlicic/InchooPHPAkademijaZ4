@@ -90,7 +90,6 @@ function nameCheck($var)
 {
     if(empty($var) || preg_match('/[^A-Za-z]/', $var)) {
         echo "Please insert only english letters: ";
-
         return nameCheck(readline());
     } else {
         return $var;
@@ -106,7 +105,6 @@ function genderCheck($var)
 {
     if(empty($var) || ($var != "m" && $var != "f")) {
         echo "Please insert only 'm' for male or 'f' for female: ";
-
         return genderCheck(readline());
     } else {
         return $var;
@@ -123,7 +121,6 @@ function amountCheck($var)
     $var = floatval(str_replace(",", ".", $var));
     if(empty($var) || $var <= 0 || !is_float($var)) {
         echo "Please insert only numeric float value (example: 5000.00): ";
-
         return amountCheck(readline());
     } else {
         return $var;
@@ -143,13 +140,11 @@ function dateCheck($var)
 
     if (!preg_match($pattern, $var, $matches))  {
         echo "Please insert the date of birth in format dd.MM.YYYY (Example 10.05.1990): ";
-
         return dateCheck(readline());
     }
 
     if (!checkdate($matches[2], $matches[1], $matches[3])) {
         echo "Please insert the date of birth in format dd.MM.YYYY (Example 10.05.1990): ";
-
         return dateCheck(readline());
     }
 
@@ -158,7 +153,6 @@ function dateCheck($var)
 
     if($testDate < $testVar) {
         echo "Please insert the date of birth in format dd.MM.YYYY (Example 10.05.1990): ";
-
         return dateCheck(readline());
     } else {
         return $var;
@@ -311,7 +305,6 @@ function averageAge($employeeArray)
     $averageDays = $totalDays / $employeeCount;
     $years = ($averageDays / 365) ; // days / 365 days
     $years = floor($years); // Remove all decimals
-
 
     // Echo all information set
     echo "The average employee is " . $years . " years old \n";
