@@ -52,7 +52,6 @@ for(;;) {
                     echo "Employee has been erased. \n";
                 }
             }
-
             break;
         case '5':
             $choice2 = "";
