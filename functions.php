@@ -260,7 +260,7 @@ function eraseEmployee($employeeArray, $employeeId)
 
 /**
  * @param $employeeArray Employees[]
- * @throws Exception
+ * @throws
  * Function check how old each employee is and adds the age of them together to variable $totalDays that stores how old
  * they are in days. It will echo out total years, months and days of all employees.
  */
@@ -290,7 +290,7 @@ function totalAge($employeeArray)
 
 /**
  * @param $employeeArray Employees[]
- * @throws Exception
+ * @throws
  * This function will check how old every employee is, add their ages together and divide by number of employees
  * Then it shows only average year of the employee. Echoes the average year.
  */
@@ -319,7 +319,7 @@ function averageAge($employeeArray)
 
 /**
  * @param $employeeArray Employees[]
- * @throws Exception
+ * @throws
  * This function counts the total amount of monthly payment in 4 groups (employees younger than 20 years, between
  * 20-30 years, between 30-40 years and older than 40 years) than echoes them out.
  */
